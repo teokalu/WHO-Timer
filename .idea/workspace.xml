@@ -29,14 +29,9 @@
       <file leaf-file-name="timer.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/timer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.064516" vertical-offset="0" max-vertical-offset="506">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="1518">
               <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-              <folding>
-                <element signature="tag#div#0;tag#div#0;tag#body#0" expanded="false" />
-                <element signature="tag#div#1;tag#div#0;tag#body#0" expanded="false" />
-                <element signature="tag#div#2;tag#div#0;tag#body#0" expanded="false" />
-                <element signature="tag#div#3;tag#div#0;tag#body#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,14 +39,11 @@
       <file leaf-file-name="timer.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/timer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8543046" vertical-offset="3362" max-vertical-offset="4268">
-              <caret line="307" column="0" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4790287" vertical-offset="5594" max-vertical-offset="6908">
+              <caret line="283" column="8" selection-start-line="283" selection-start-column="8" selection-end-line="283" selection-end-column="8" />
               <folding>
-                <element signature="n#!!block;n#Timer#0" expanded="false" />
-                <element signature="e#1428#3919#0" expanded="false" />
-                <element signature="e#3995#4141#0" expanded="false" />
-                <element signature="e#4205#4469#0" expanded="false" />
-                <element signature="e#8558#8620#0" expanded="false" />
+                <element signature="e#3785#3835#0" expanded="false" />
+                <element signature="e#3913#4059#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -164,6 +156,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -174,12 +174,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -187,16 +189,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -226,7 +218,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17395833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -236,6 +227,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -262,16 +254,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/timer.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="3212">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/timer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="176" max-vertical-offset="462">
           <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-          <folding>
-            <element signature="tag#div#0;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#1;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#2;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#3;tag#div#0;tag#body#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -280,11 +275,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="682" max-vertical-offset="9394">
           <caret line="31" column="71" selection-start-line="31" selection-start-column="71" selection-end-line="31" selection-end-column="71" />
           <folding>
-            <element signature="n#!!block;n#Timer#0" expanded="false" />
-            <element signature="e#1428#3919#0" expanded="false" />
-            <element signature="e#3995#4141#0" expanded="false" />
-            <element signature="e#4205#4469#0" expanded="false" />
-            <element signature="e#8558#8620#0" expanded="false" />
+            <element signature="e#3785#3835#0" expanded="false" />
+            <element signature="e#3913#4059#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -301,12 +293,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1232">
           <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-          <folding>
-            <element signature="tag#div#0;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#1;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#2;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#3;tag#div#0;tag#body#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -315,11 +302,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="4378" max-vertical-offset="9372">
           <caret line="199" column="22" selection-start-line="199" selection-start-column="22" selection-end-line="199" selection-end-column="22" />
           <folding>
-            <element signature="n#!!block;n#Timer#0" expanded="false" />
-            <element signature="e#1428#3919#0" expanded="false" />
-            <element signature="e#3995#4141#0" expanded="false" />
-            <element signature="e#4205#4469#0" expanded="false" />
-            <element signature="e#8558#8620#0" expanded="false" />
+            <element signature="e#3785#3835#0" expanded="false" />
+            <element signature="e#3913#4059#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -336,12 +320,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1848">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding>
-            <element signature="tag#div#0;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#1;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#2;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#3;tag#div#0;tag#body#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -350,11 +329,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="660">
           <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
           <folding>
-            <element signature="n#!!block;n#Timer#0" expanded="false" />
-            <element signature="e#1428#3919#0" expanded="false" />
-            <element signature="e#3995#4141#0" expanded="false" />
-            <element signature="e#4205#4469#0" expanded="false" />
-            <element signature="e#8558#8620#0" expanded="false" />
+            <element signature="e#3785#3835#0" expanded="false" />
+            <element signature="e#3913#4059#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -645,7 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50993377" vertical-offset="0" max-vertical-offset="2860">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -659,27 +634,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/timer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.064516" vertical-offset="0" max-vertical-offset="506">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="1518">
           <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding>
-            <element signature="tag#div#0;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#1;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#2;tag#div#0;tag#body#0" expanded="false" />
-            <element signature="tag#div#3;tag#div#0;tag#body#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/timer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8543046" vertical-offset="3362" max-vertical-offset="4268">
-          <caret line="307" column="0" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4790287" vertical-offset="5594" max-vertical-offset="6908">
+          <caret line="283" column="8" selection-start-line="283" selection-start-column="8" selection-end-line="283" selection-end-column="8" />
           <folding>
-            <element signature="n#!!block;n#Timer#0" expanded="false" />
-            <element signature="e#1428#3919#0" expanded="false" />
-            <element signature="e#3995#4141#0" expanded="false" />
-            <element signature="e#4205#4469#0" expanded="false" />
-            <element signature="e#8558#8620#0" expanded="false" />
+            <element signature="e#3785#3835#0" expanded="false" />
+            <element signature="e#3913#4059#0" expanded="false" />
           </folding>
         </state>
       </provider>
