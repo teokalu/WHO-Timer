@@ -18,16 +18,16 @@ html {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 190px;
-    height: 250px;
-    background-color: cadetblue;
+    width: 100px;
+    height: 200px;
+    /*background-color: cadetblue;*/
 }
 #controlsArea {
     position: relative;
     top: 5px;
     left: 5px;
-    width: 180px;
-    height: 240px;
+    width: 100px;
+    height: 200px;
 }
 .console td {
     padding: 0px;
@@ -43,9 +43,9 @@ html {
     background: none;
     border: 0px solid black;
 }
-/*.console img {
-    width: 20px;
-}*/
+.console img {
+    width: 26px;
+}
 
 
 
@@ -57,7 +57,7 @@ html {
     left: 1120px;
     width: 800px;
     height: 261px;
-    background-color: blue;
+    /*background-color: blue;*/
 }
 #timerGroup {
     position: relative;
@@ -67,14 +67,14 @@ html {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
-    background-color: slateblue;
+    /*background-color: slateblue;*/
 }
 #timerGroup table {
     margin-left: auto;
     margin-right: auto;
     width: 680px;
     height: 240px;
-    background-color: cornflowerblue;
+    /*background-color: cornflowerblue;*/
 }
 #country_current {
     font-size: 40px;
@@ -82,7 +82,7 @@ html {
     /*margin-left: 20px;*/
     text-align: center;
     margin-top: 900px;
-    background-color: lightpink;
+    /*background-color: lightpink;*/
 }
 #timerPod {
     /*position: relative;*/
@@ -93,12 +93,12 @@ html {
     /*background-color: #99fe00;*//**//*(green)*/
     /*background-color: #f4d75f;*//**//*(orange)*/
     /*background-color: #fd030d;*//**//*(red)*/
-    background-color: deeppink;
+    /*background-color: deeppink;*/
 }
 #timer_public {
-    background-color: lightpink;
     font-size: 130px;
     color: white;
+    /*background-color: lightpink;*/
 }
 #country_next {
     font-size: 35px;
@@ -106,7 +106,7 @@ html {
     /*margin-left: 20px;*/
     text-align: center;
     margin-top: 900px;
-    background-color: lightpink;
+    /*background-color: lightpink;*/
 }
 /*speakerArea*/
 #speakerArea {

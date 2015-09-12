@@ -26,6 +26,9 @@ Session.prototype.initializeUI = function(){
     //update timer
     mySession.updateTimer();
 
+    //switch timer to normal clock mode
+    mySession.startNormalClock();
+
     //test - check for the document window size
     var a = $(document).width();
     var b = $(document).height();
@@ -343,7 +346,4 @@ $(document).ready(function() {
 
     //initializeUI
     mySession.initializeUI();
-
-    //test
-    mySession.startNormalClock();
 });
