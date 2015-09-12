@@ -40,7 +40,15 @@ Session.prototype.initializeUI = function(){
 Session.prototype.initializeListeners = function(){
 
     //create onclick() event handlers for all buttons:
-    //Total time UP
+    //TIMER button
+    $('#b_timer').click(function () {
+        $('#timer_public').text(mySession.resetTimer());
+    });
+    //CLOCK button
+    $('#b_clock').click(function () {
+        mySession.startNormalClock();
+    });
+    //Total time UP button
     $("#b_t_up").click(function () {
         //set total time up
         if (mySession.totalTime < 60) {
@@ -48,7 +56,7 @@ Session.prototype.initializeListeners = function(){
             $('#A1').text(mySession.format(mySession.totalTime));
         }
     });
-    //Total time DOWN
+    //Total time DOWN button
     $('#b_t_down').click(function () {
         //set total time down
         if (mySession.totalTime > 0 && mySession.totalTime > mySession.sumupTime) {
@@ -56,7 +64,7 @@ Session.prototype.initializeListeners = function(){
             $('#A1').text(mySession.format(mySession.totalTime));
         }
     });
-    //Sum-up time UP
+    //Sum-up time UP button
     $('#b_s_up').click(function () {
         //set sum-up time up
         if (mySession.sumupTime < mySession.totalTime) {
@@ -64,7 +72,7 @@ Session.prototype.initializeListeners = function(){
             $('#A2').text(mySession.format(mySession.sumupTime));
         }
     });
-    //Sum-up time DOWN
+    //Sum-up time DOWN button
     $('#b_s_down').click(function () {
         //set sum-up time down
         if (mySession.sumupTime > 0) {
@@ -89,14 +97,14 @@ Session.prototype.initializeListeners = function(){
     $('#b_clear').click(function () {
         mySession.clear();
     });
-    //L (=Logo) button
+    /*//L (=Logo) button
     $('#b_L').click(function () {
         $('#logoArea').toggle();
     });
     //S (=Speaker) button
     $('#b_S').click(function () {
         $('#speakerArea').toggle();
-    });
+    });*/
 
     //create the "show" & "hide" listeners to the controlAreaPod DIV
     $( "#controlsAreaPod" ).mouseover(function() {
@@ -152,6 +160,27 @@ Session.prototype.resetTimer = function () {
     return "00:00";
 };
 
+//change timer to a normal clock
+Session.prototype.startNormalClock = function () {
+
+    myDate = new Date();
+
+    h = myDate.getHours();
+    if (h < 10) {
+        h = "0" + h;
+    }
+
+    m = myDate.getMinutes();
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    $('#timer_public').text(h + ":" + m);
+
+    /*t = setTimeout(function () {
+        startTime()
+    }, 500);*/
+};
 //start the timer
 Session.prototype.startCountdown = function() {
 
@@ -314,4 +343,7 @@ $(document).ready(function() {
 
     //initializeUI
     mySession.initializeUI();
+
+    //test
+    mySession.startNormalClock();
 });
