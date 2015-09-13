@@ -1,6 +1,6 @@
 //constructor for class Session
 function Session(sTimer, totalTime, sumupTime, currentTotalSeconds, sumupSeconds, intervalHandle,
-                 timerMode, pauseOn) {
+                 timerMode, pauseOn, clockMode) {
     this.sTimer = sTimer;
     this.totalTime = totalTime;
     this.sumupTime = sumupTime;
@@ -23,11 +23,11 @@ Session.prototype.initializeUI = function(){
     $( "#speakerArea" ).hide();
     $( "#logoArea" ).hide();
 
-    //update timer
-    mySession.updateTimer();
+/*    //update timer
+    mySession.updateTimer();*/
 
     //switch timer to normal clock mode
-    mySession.startNormalClock();
+    mySession.updateClock();
 
     //test - check for the document window size
     var a = $(document).width();
@@ -46,10 +46,11 @@ Session.prototype.initializeListeners = function(){
     //TIMER button
     $('#b_timer').click(function () {
         $('#timer_public').text(mySession.resetTimer());
+        mySession.clockMode = 0;
     });
     //CLOCK button
     $('#b_clock').click(function () {
-        mySession.startNormalClock();
+        mySession.startClock();
     });
     //Total time UP button
     $("#b_t_up").click(function () {
@@ -163,8 +164,14 @@ Session.prototype.resetTimer = function () {
     return "00:00";
 };
 
-//change timer to a normal clock
-Session.prototype.startNormalClock = function () {
+Session.prototype.startClock = function() {
+
+    mySession.updateClock();
+    mySession.clockMode = 1;
+};
+
+//update timer to a normal clock
+Session.prototype.updateClock = function () {
 
     myDate = new Date();
 
@@ -177,13 +184,9 @@ Session.prototype.startNormalClock = function () {
     if (m < 10) {
         m = "0" + m;
     }
-
-    $('#timer_public').text(h + ":" + m);
-
-    /*t = setTimeout(function () {
-        startTime()
-    }, 500);*/
+    mySession.intervalHandle = setInterval($('#timer_public').text(h + ":" + m), 1000);
 };
+
 //start the timer
 Session.prototype.startCountdown = function() {
 
@@ -342,7 +345,7 @@ Session.prototype.clear = function() {
 $(document).ready(function() {
 
     //create a new object of 'class' "timer"
-    mySession = new Session("00:00", 0, 0, 0, 0, 0, 0, 1);
+    mySession = new Session("00:00", 0, 0, 0, 0, 0, 0, 1, 1);
 
     //initializeUI
     mySession.initializeUI();
