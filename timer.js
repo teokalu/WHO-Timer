@@ -184,7 +184,7 @@ Session.prototype.updateClock = function () {
     if (m < 10) {
         m = "0" + m;
     }
-    mySession.intervalHandle = setInterval($('#timer_public').text(h + ":" + m), 1000);
+    //mySession.intervalHandle = setInterval($('#timer_public').text(h + ":" + m), 1000);
 };
 
 //start the timer

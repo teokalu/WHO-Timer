@@ -96,7 +96,8 @@ html {
     /*background-color: deeppink;*/
 }
 #timer_public {
-    font-size: 130px;
+    font-size: 115px;
+    font-family: "Franklin Gothic Book", Times, serif;
     color: white;
     /*background-color: lightpink;*/
 }
