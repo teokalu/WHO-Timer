@@ -8,7 +8,7 @@ function Timer(totalTimeRequested, sumupTimeRequested, currentTotalSeconds, sumu
     this.intervalHandle = intervalHandle;
     this.publicTimerWindow = publicTimerWindow;
     this.publicTimerWindowOpen = publicTimerWindowOpen;
-    this.timerMode = timerMode;
+    this.sessionMode = timerMode;
     this.pauseOn = pauseOn;
 }
 
@@ -112,8 +112,8 @@ Timer.prototype.startCountdown = function() {
 
         if (myTimer.totalTimeRequested > 0) {
 
-            //switch timerMode from 0 to 1
-            myTimer.timerMode = 1;
+            //switch sessionMode from 0 to 1
+            myTimer.sessionMode = 1;
 
             //get time in seconds
             myTimer.currentTotalSeconds = myTimer.totalTimeRequested * 60;
@@ -176,7 +176,7 @@ Timer.prototype.updateDisplays = function (currentTotalSeconds) {
 Timer.prototype.tick = function () {
 
     //if inside the time limit
-    if (myTimer.currentTotalSeconds>0 && myTimer.timerMode==1) {
+    if (myTimer.currentTotalSeconds>0 && myTimer.sessionMode==1) {
 
         //subtract from seconds remaining
         myTimer.currentTotalSeconds--;
@@ -184,8 +184,8 @@ Timer.prototype.tick = function () {
         //if outside the time limit (or if currentTotalSeconds<=0)
     } else {
 
-        //switch timerMode from 1 to 3
-        myTimer.timerMode = 3;
+        //switch sessionMode from 1 to 3
+        myTimer.sessionMode = 3;
 
         //add to seconds remaining
         myTimer.currentTotalSeconds++;
@@ -204,7 +204,7 @@ Timer.prototype.paintTrafficLights = function() {
     countMode_sec = myTimer.currentTotalSeconds - myTimer.sumupSeconds;
 
     //if on reset
-    if (myTimer.timerMode == 0 ) {
+    if (myTimer.sessionMode == 0 ) {
         //in public
         if (myTimer.publicTimerWindow) {
             myTimer.publicTimerWindow.document.getElementById("timer_public").style.color = 'white';
@@ -215,7 +215,7 @@ Timer.prototype.paintTrafficLights = function() {
         document.getElementById("box_red").style.backgroundColor = 'white';
 
         //else if (TotalTime < 'currentTick' < Sum-upTime)
-    } else if ((myTimer.currentTotalSeconds > 0) && (countMode_sec >= 0) && (myTimer.timerMode != 3)) {
+    } else if ((myTimer.currentTotalSeconds > 0) && (countMode_sec >= 0) && (myTimer.sessionMode != 3)) {
         //in public
         if (myTimer.publicTimerWindow) {
             myTimer.publicTimerWindow.document.getElementById("timer_public").style.color = 'white';
@@ -226,7 +226,7 @@ Timer.prototype.paintTrafficLights = function() {
         document.getElementById("box_red").style.backgroundColor = 'white';
 
         //else if (Sum-upTime < 'currentTick' < 0)
-    } else if ((myTimer.currentTotalSeconds > 0) && (countMode_sec < 0) && (myTimer.timerMode != 3)) {
+    } else if ((myTimer.currentTotalSeconds > 0) && (countMode_sec < 0) && (myTimer.sessionMode != 3)) {
         //in public
         if (myTimer.publicTimerWindow) {
             myTimer.publicTimerWindow.document.getElementById("timer_public").style.color = 'white';
@@ -237,7 +237,7 @@ Timer.prototype.paintTrafficLights = function() {
         document.getElementById("box_red").style.backgroundColor = 'white';
 
         //if (0 < 'currentTick')
-    } else if (myTimer.timerMode == 3) {
+    } else if (myTimer.sessionMode == 3) {
         //in public
         if (myTimer.publicTimerWindow) {
             myTimer.publicTimerWindow.document.getElementById("timer_public").style.color = '#fd030d';
@@ -276,7 +276,7 @@ Timer.prototype.repeat = function() {
     clearInterval(myTimer.intervalHandle);
 
     //reset flags to initial state
-    myTimer.timerMode = 0;
+    myTimer.sessionMode = 0;
     myTimer.publicTimerWindowOpen = false;
     myTimer.pauseOn = false;
 

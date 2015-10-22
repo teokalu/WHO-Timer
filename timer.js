@@ -1,42 +1,51 @@
 //constructor for class Session
-function Session(sTimer, totalTime, sumupTime, currentTotalSeconds, sumupSeconds, intervalHandle,
-                 timerMode, pauseOn, clockMode) {
-    this.sTimer = sTimer;
-    this.totalTime = totalTime;
-    this.sumupTime = sumupTime;
-    this.currentTotalSeconds = currentTotalSeconds;
-    this.sumupSeconds = sumupSeconds;
+function Session(timerCurrentTime, timerTotalTime, timerSumupTime, timerCurrentTotalSeconds, timerSumupSeconds, intervalHandle,
+                 sessionMode, pauseOn) {
+    this.sTimer = timerCurrentTime;
+    this.totalTime = timerTotalTime;
+    this.sumupTime = timerSumupTime;
+    this.currentTotalSeconds = timerCurrentTotalSeconds;
+    this.sumupSeconds = timerSumupSeconds;
     this.intervalHandle = intervalHandle;
-    this.timerMode = timerMode;
+    this.sessionMode = sessionMode;
     this.pauseOn = pauseOn;
+
+    //run initializeUI
+    this.initializeUI();
 }
 
-//methods - 'class': timer
+//methods - 'class': Session
 
 //initializeUI
 Session.prototype.initializeUI = function(){
+
+    console.log("initializeUI has run...");
+
     //initializeUI all listeners
-    mySession.initializeListeners();
+    this.initializeListeners();
+
+    console.log("initializeListeners has run...")
+
+    //if in Clock Mode:
+    if (this.sessionMode == 1) {
+        //then, show system time
+        this.updateClock();
+        console.log("...in Clock Mode:")
+    }
 
     //hide the controlsArea, speakerArea and logoArea DIVs
     $( "#controlsArea" ).hide();
     $( "#speakerArea" ).hide();
     $( "#logoArea" ).hide();
 
-/*    //update timer
-    mySession.updateTimer();*/
-
-    //switch timer to normal clock mode
-    mySession.updateClock();
-
-    //test - check for the document window size
+    /*//test - check for the document window size
     var a = $(document).width();
     var b = $(document).height();
     var c = $(window).width();
     var d = $(window).height();
     console.log('//check this in 100% zoom:');
     console.log('-document width: ' + a +', document height: ' + b + '.');
-    console.log('-window width: ' + c + ', window height: ' + d + '.');
+    console.log('-window width: ' + c + ', window height: ' + d + '.');*/
 };
 
 //initializeListeners
@@ -45,12 +54,13 @@ Session.prototype.initializeListeners = function(){
     //create onclick() event handlers for all buttons:
     //TIMER button
     $('#b_timer').click(function () {
-        $('#timer_public').text(mySession.resetTimer());
-        mySession.clockMode = 0;
+        //create a new "timer" session
+        mySession = new Session(0, 0, 0, 0, 0, 1);
     });
     //CLOCK button
     $('#b_clock').click(function () {
-        mySession.startClock();
+        //create a new "clock" session
+        mySession = new Session(0, 0, 0, 0, 1, 1);
     });
     //Total time UP button
     $("#b_t_up").click(function () {
@@ -194,8 +204,8 @@ Session.prototype.startCountdown = function() {
 
         if (mySession.totalTime > 0) {
 
-            //switch timerMode from 0 to 1
-            mySession.timerMode = 1;
+            //switch sessionMode from 0 to 1
+            mySession.sessionMode = 1;
 
             //get time in seconds
             mySession.currentTotalSeconds = mySession.totalTime * 60;
@@ -259,7 +269,7 @@ Session.prototype.updateDisplays = function (currentTotalSeconds) {
 Session.prototype.tick = function () {
 
     //if inside the time limit
-    if (mySession.currentTotalSeconds>0 && mySession.timerMode==1) {
+    if (mySession.currentTotalSeconds>0 && mySession.sessionMode==1) {
 
         //subtract from seconds remaining
         mySession.currentTotalSeconds--;
@@ -267,8 +277,8 @@ Session.prototype.tick = function () {
         //if outside the time limit (or if currentTotalSeconds<=0)
     } else {
 
-        //switch timerMode from 1 to 3
-        mySession.timerMode = 3;
+        //switch sessionMode from 1 to 3
+        mySession.sessionMode = 3;
 
         //add to seconds remaining
         mySession.currentTotalSeconds++;
@@ -288,22 +298,22 @@ Session.prototype.paintTrafficLights = function() {
     countMode_sec = mySession.currentTotalSeconds - mySession.sumupSeconds;
 
     //if on reset
-    if (mySession.timerMode == 0 ) {
+    if (mySession.sessionMode == 0 ) {
         //in public
         document.getElementById("timer_public").style.color = 'white';
 
         //else if (TotalTime < 'currentTick' < Sum-upTime)
-    } else if ((mySession.currentTotalSeconds > 0) && (countMode_sec >= 0) && (mySession.timerMode != 3)) {
+    } else if ((mySession.currentTotalSeconds > 0) && (countMode_sec >= 0) && (mySession.sessionMode != 3)) {
         //in public
         document.getElementById("timer_public").style.color = 'white';
 
         //else if (Sum-upTime < 'currentTick' < 0)
-    } else if ((mySession.currentTotalSeconds > 0) && (countMode_sec < 0) && (mySession.timerMode != 3)) {
+    } else if ((mySession.currentTotalSeconds > 0) && (countMode_sec < 0) && (mySession.sessionMode != 3)) {
         //in public
         document.getElementById("timer_public").style.color = 'white';
 
         //if (0 < 'currentTick')
-    } else if (mySession.timerMode == 3) {
+    } else if (mySession.sessionMode == 3) {
         //in public
         document.getElementById("timer_public").style.color = '#fd030d';
     }
@@ -316,7 +326,7 @@ Session.prototype.repeat = function() {
     clearInterval(mySession.intervalHandle);
 
     //reset flags to initial state
-    mySession.timerMode = 0;
+    mySession.sessionMode = 0;
     mySession.pauseOn = false;
 
 
@@ -344,9 +354,11 @@ Session.prototype.clear = function() {
 //main - triggered when document ready
 $(document).ready(function() {
 
-    //create a new object of 'class' "timer"
-    mySession = new Session("00:00", 0, 0, 0, 0, 0, 0, 1, 1);
+    //create a new object of 'class' "Session"
+        //timerCurrentTime=0, timerTotalTime=0, timerSumupTime=0,
+        //intervalHandle=0, sessionMode=0(timer), pauseOn=1.
+    mySession = new Session(0, 0, 0, 0, 0, 1);
 
-    //initializeUI
-    mySession.initializeUI();
+/*    //initializeUI
+    mySession.initializeUI();*/
 });
