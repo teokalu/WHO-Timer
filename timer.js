@@ -7,11 +7,12 @@ function Session(sessionMode) {
     this.initializeUI();
 
     //start a new Timer or Clock session
-    if (sessionMode = 0) {
+    if (sessionMode == 0) {
         myTimerSession = new TimerSession();
-    } else {
+    } else if (sessionMode == 1) {
         myClockSession = new ClockSession();
     }
+    console.log("sessionMode = " + sessionMode)
 }
 
 //methods - 'class': Session
@@ -148,6 +149,9 @@ function TimerSession(timerCurrentTime, timerTotalTime, timerSumupTime, timerCur
     this.sumupSeconds = timerSumupSeconds;
     this.intervalHandle = intervalHandle;
     this.pauseOn = pauseOn;
+
+    //Show timerControls buttons
+    $( "#timerControls" ).show();
 }
 
 //constructor for class ClockSession
@@ -171,6 +175,9 @@ function ClockSession() {
     $('#display').text(myClockString);
 
     //mySession.intervalHandle = setInterval($('#display').text(h + ":" + m), 1000);
+
+    //Hide timerControls buttons
+    $( "#timerControls" ).hide();
 }
 
 //update timer
