@@ -1,17 +1,17 @@
 //constructor for class Session
-function Session(timerCurrentTime, timerTotalTime, timerSumupTime, timerCurrentTotalSeconds, timerSumupSeconds, intervalHandle,
-                 sessionMode, pauseOn) {
-    this.sTimer = timerCurrentTime;
-    this.totalTime = timerTotalTime;
-    this.sumupTime = timerSumupTime;
-    this.currentTotalSeconds = timerCurrentTotalSeconds;
-    this.sumupSeconds = timerSumupSeconds;
-    this.intervalHandle = intervalHandle;
+function Session(sessionMode) {
+
     this.sessionMode = sessionMode;
-    this.pauseOn = pauseOn;
 
     //run initializeUI
     this.initializeUI();
+
+    //start a new Timer or Clock session
+    if (sessionMode = 0) {
+        myTimerSession = new TimerSession();
+    } else {
+        myClockSession = new ClockSession();
+    }
 }
 
 //methods - 'class': Session
@@ -25,13 +25,6 @@ Session.prototype.initializeUI = function(){
     this.initializeListeners();
 
     console.log("initializeListeners has run...")
-
-    //if in Clock Mode:
-    if (this.sessionMode == 1) {
-        //then, show system time
-        this.updateClock();
-        console.log("...in Clock Mode:")
-    }
 
     //hide the controlsArea, speakerArea and logoArea DIVs
     $( "#controlsArea" ).hide();
@@ -55,12 +48,12 @@ Session.prototype.initializeListeners = function(){
     //TIMER button
     $('#b_timer').click(function () {
         //create a new "timer" session
-        mySession = new Session(0, 0, 0, 0, 0, 1);
+        myTimerSession = new TimerSession();
     });
     //CLOCK button
     $('#b_clock').click(function () {
         //create a new "clock" session
-        mySession = new Session(0, 0, 0, 0, 1, 1);
+        myClockSession = new ClockSession();
     });
     //Total time UP button
     $("#b_t_up").click(function () {
@@ -145,9 +138,44 @@ Session.prototype.initializeListeners = function(){
     });
 };
 
+//constructor for class TimerSession
+function TimerSession(timerCurrentTime, timerTotalTime, timerSumupTime, timerCurrentTotalSeconds, timerSumupSeconds, intervalHandle,
+                 pauseOn) {
+    this.sTimer = timerCurrentTime;
+    this.totalTime = timerTotalTime;
+    this.sumupTime = timerSumupTime;
+    this.currentTotalSeconds = timerCurrentTotalSeconds;
+    this.sumupSeconds = timerSumupSeconds;
+    this.intervalHandle = intervalHandle;
+    this.pauseOn = pauseOn;
+}
+
+//constructor for class ClockSession
+function ClockSession() {
+
+    //get updated time
+    myDate = new Date();
+    h = myDate.getHours();
+    if (h < 10) {
+        h = "0" + h;
+    }
+    m = myDate.getMinutes();
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    //Construct Clock string
+    myClockString = h + ":" + m ;
+
+    //Display Clock string
+    $('#display').text(myClockString);
+
+    //mySession.intervalHandle = setInterval($('#display').text(h + ":" + m), 1000);
+}
+
 //update timer
 Session.prototype.updateTimer = function(){
-    $('#timer_public').text(mySession.sTimer);
+    $('#display').text(mySession.sTimer);
 };
 
 //format display
@@ -183,18 +211,8 @@ Session.prototype.startClock = function() {
 //update timer to a normal clock
 Session.prototype.updateClock = function () {
 
-    myDate = new Date();
 
-    h = myDate.getHours();
-    if (h < 10) {
-        h = "0" + h;
-    }
 
-    m = myDate.getMinutes();
-    if (m < 10) {
-        m = "0" + m;
-    }
-    //mySession.intervalHandle = setInterval($('#timer_public').text(h + ":" + m), 1000);
 };
 
 //start the timer
@@ -355,10 +373,6 @@ Session.prototype.clear = function() {
 $(document).ready(function() {
 
     //create a new object of 'class' "Session"
-        //timerCurrentTime=0, timerTotalTime=0, timerSumupTime=0,
-        //intervalHandle=0, sessionMode=0(timer), pauseOn=1.
-    mySession = new Session(0, 0, 0, 0, 0, 1);
-
-/*    //initializeUI
-    mySession.initializeUI();*/
+    //sessionMode=0(Timer), sessionMode=1(Clock). Current default setting: Timer
+    mySession = new Session(0);
 });
