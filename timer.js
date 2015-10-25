@@ -8,7 +8,7 @@ function Session(sessionMode) {
 
     //start a new Timer or Clock session
     if (sessionMode == 0) {
-        myTimerSession = new TimerSession();
+        myTimerSession = new TimerSession(0, 0, 0, 0, 0, 0, 0);
     } else if (sessionMode == 1) {
         myClockSession = new ClockSession();
     }
@@ -58,52 +58,46 @@ Session.prototype.initializeListeners = function(){
     });
     //Total time UP button
     $("#b_t_up").click(function () {
-        //set total time up
-        if (mySession.totalTime < 60) {
-            mySession.totalTime += 1;
-            $('#A1').text(mySession.format(mySession.totalTime));
-        }
+        //increase total time
+        myTimerSession.increaseTotalTime();
     });
     //Total time DOWN button
     $('#b_t_down').click(function () {
-        //set total time down
-        if (mySession.totalTime > 0 && mySession.totalTime > mySession.sumupTime) {
-            mySession.totalTime -= 1;
-            $('#A1').text(mySession.format(mySession.totalTime));
-        }
+        //decrease total time
+        myTimerSession.decreaseTotalTime();
     });
-    //Sum-up time UP button
+    /*//Sum-up time UP button
     $('#b_s_up').click(function () {
         //set sum-up time up
-        if (mySession.sumupTime < mySession.totalTime) {
-            mySession.sumupTime += 1;
-            $('#A2').text(mySession.format(mySession.sumupTime));
+        if (myTimerSession.sumupTime < myTimerSession.totalTime) {
+            myTimerSession.sumupTime += 1;
+            $('#A2').text(myTimerSession.format(myTimerSession.sumupTime));
         }
     });
     //Sum-up time DOWN button
     $('#b_s_down').click(function () {
         //set sum-up time down
-        if (mySession.sumupTime > 0) {
-            mySession.sumupTime -= 1;
-            $('#A2').text(mySession.format(mySession.sumupTime));
+        if (myTimerSession.sumupTime > 0) {
+            myTimerSession.sumupTime -= 1;
+            $('#A2').text(myTimerSession.format(myTimerSession.sumupTime));
         }
-    });
+    });*/
     //START button
     $('#b_start').click(function () {
-        mySession.startCountdown();
+        myTimerSession.startCountdown();
     });
     //PAUSE button
     $('#b_pause').attr({
-        onclick: 'mySession.pause()',
+        onclick: 'myTimerSession.pause()',
         disabled: 'disabled()'
     });
     //REPEAT button
     $('#b_repeat').click(function () {
-        mySession.repeat();
+        myTimerSession.repeat();
     });
     //CLEAR button
     $('#b_clear').click(function () {
-        mySession.clear();
+        myTimerSession.clear();
     });
     /*//L (=Logo) button
     $('#b_L').click(function () {
@@ -150,53 +144,53 @@ function TimerSession(timerCurrentTime, timerTotalTime, timerSumupTime, timerCur
     this.intervalHandle = intervalHandle;
     this.pauseOn = pauseOn;
 
+    //stop the Timer's intervalHandle
+    clearInterval(myClockSession.intervalHandle);
+
     //Show timerControls buttons
     $( "#timerControls" ).show();
+
+    //Display Tiimer
+    $('#display').text("00:00");
+
+
 }
 
-//constructor for class ClockSession
-function ClockSession() {
+//Increase total time (used by buttons' listeners)
+TimerSession.prototype.increaseTotalTime = function() {
 
-    //get updated time
-    myDate = new Date();
-    h = myDate.getHours();
-    if (h < 10) {
-        h = "0" + h;
+    if (myTimerSession.totalTime < 60) {
+        myTimerSession.totalTime += 1;
+        $('#A1').text(myTimerSession.format(myTimerSession.totalTime));
     }
-    m = myDate.getMinutes();
-    if (m < 10) {
-        m = "0" + m;
+};
+
+//Decrease total time (used by buttons' listeners)
+TimerSession.prototype.decreaseTotalTime = function() {
+
+    if (myTimerSession.totalTime > 0 && myTimerSession.totalTime > myTimerSession.sumupTime) {
+        myTimerSession.totalTime -= 1;
+        $('#A1').text(myTimerSession.format(myTimerSession.totalTime));
     }
-
-    //Construct Clock string
-    myClockString = h + ":" + m ;
-
-    //Display Clock string
-    $('#display').text(myClockString);
-
-    //mySession.intervalHandle = setInterval($('#display').text(h + ":" + m), 1000);
-
-    //Hide timerControls buttons
-    $( "#timerControls" ).hide();
-}
+};
 
 //update timer
-Session.prototype.updateTimer = function(){
+TimerSession.prototype.updateTimer = function(){
     $('#display').text(mySession.sTimer);
 };
 
 //format display
-Session.prototype.formatDisplay = function(display, time) {
+TimerSession.prototype.formatDisplay = function(display, time) {
 
     if (time < 10) {
-        $('#'+display).html("0" + time + ":" + "00");
+        $('#display').html("0" + time + ":" + "00");
     } else {
-        $('#'+display).html(time + ":" + "00");
+        $('#display').html(time + ":" + "00");
     }
 };
 
 //format to String
-Session.prototype.format = function(value) {
+TimerSession.prototype.format = function(value) {
     if (value < 10) {
         return ("0" + value + ":" + "00");
     } else {
@@ -205,44 +199,37 @@ Session.prototype.format = function(value) {
 };
 
 //reset timer
-Session.prototype.resetTimer = function () {
+TimerSession.prototype.resetTimer = function () {
     return "00:00";
 };
 
-Session.prototype.startClock = function() {
+TimerSession.prototype.startClock = function() {
 
-    mySession.updateClock();
-    mySession.clockMode = 1;
-};
-
-//update timer to a normal clock
-Session.prototype.updateClock = function () {
-
-
-
+    myTimerSession.updateClock();
+    myTimerSession.clockMode = 1;
 };
 
 //start the timer
-Session.prototype.startCountdown = function() {
+TimerSession.prototype.startCountdown = function() {
 
-    if (!mySession.pauseOn) {
+    if (!myTimerSession.pauseOn) {
 
-        if (mySession.totalTime > 0) {
+        if (myTimerSession.totalTime > 0) {
 
             //switch sessionMode from 0 to 1
-            mySession.sessionMode = 1;
+            myTimerSession.sessionMode = 1;
 
             //get time in seconds
-            mySession.currentTotalSeconds = mySession.totalTime * 60;
-            mySession.sumupSeconds = mySession.sumupTime *60;
+            myTimerSession.currentTotalSeconds = myTimerSession.totalTime * 60;
+            myTimerSession.sumupSeconds = myTimerSession.sumupTime *60;
         }
     } else {
 
         //switch pauseOn from true to false
-        mySession.pauseOn = false;
+        myTimerSession.pauseOn = false;
     }
     //call the "tick" function every second
-    mySession.intervalHandle = setInterval(mySession.tick, 1000);
+    myTimerSession.intervalHandle = setInterval(myTimerSession.tick, 1000);
 
     //enable/disable START and PAUSE buttons
     $('#b_start').attr('disabled','disabled');
@@ -250,24 +237,24 @@ Session.prototype.startCountdown = function() {
 };
 
 //pause function
-Session.prototype.pause = function() {
+TimerSession.prototype.pause = function() {
 
     //stop counter
-    clearInterval(mySession.intervalHandle);
+    clearInterval(myTimerSession.intervalHandle);
 
     //manipulate buttons
     $('#b_pause').attr('disabled','disabled');
     $('#b_start').removeAttr("disabled");
 
-    mySession.pauseOn = true;
+    myTimerSession.pauseOn = true;
 };
 
 //update displays in admin and public views
-Session.prototype.updateDisplays = function (currentTotalSeconds) {
+TimerSession.prototype.updateDisplays = function (currentTotalSeconds) {
 
     //turn the seconds into mm:ss
-    var min = Math.floor(mySession.currentTotalSeconds / 60);
-    var sec = mySession.currentTotalSeconds - (min * 60);
+    var min = Math.floor(myTimerSession.currentTotalSeconds / 60);
+    var sec = myTimerSession.currentTotalSeconds - (min * 60);
 
     //add a leading zero for minutes
     if (min < 10) {
@@ -287,82 +274,82 @@ Session.prototype.updateDisplays = function (currentTotalSeconds) {
     $('#A').html(time_forDisplay);
 
     //- in timer public
-    document.getElementById("timer_public").textContent = time_forDisplay;
+    document.getElementById("display").textContent = time_forDisplay;
 };
 
 //this is the core timer function
-Session.prototype.tick = function () {
+TimerSession.prototype.tick = function () {
 
     //if inside the time limit
-    if (mySession.currentTotalSeconds>0 && mySession.sessionMode==1) {
+    if (myTimerSession.currentTotalSeconds>0 && myTimerSession.sessionMode==1) {
 
         //subtract from seconds remaining
-        mySession.currentTotalSeconds--;
+        myTimerSession.currentTotalSeconds--;
 
         //if outside the time limit (or if currentTotalSeconds<=0)
     } else {
 
         //switch sessionMode from 1 to 3
-        mySession.sessionMode = 3;
+        myTimerSession.sessionMode = 3;
 
         //add to seconds remaining
-        mySession.currentTotalSeconds++;
+        myTimerSession.currentTotalSeconds++;
     }
 
     //Do the following on each 'tick':
     //update the display digits
-    mySession.updateDisplays(mySession.currentTotalSeconds);
+    myTimerSession.updateDisplays(myTimerSession.currentTotalSeconds);
 
     //update the display traffic light colors
-    mySession.paintTrafficLights();
+    myTimerSession.paintTrafficLights();
 };
 
 //change public timer to the appropriate color
-Session.prototype.paintTrafficLights = function() {
+TimerSession.prototype.paintTrafficLights = function() {
 
-    countMode_sec = mySession.currentTotalSeconds - mySession.sumupSeconds;
+    countMode_sec = myTimerSession.currentTotalSeconds - myTimerSession.sumupSeconds;
 
     //if on reset
-    if (mySession.sessionMode == 0 ) {
+    if (myTimerSession.sessionMode == 0 ) {
         //in public
-        document.getElementById("timer_public").style.color = 'white';
+        document.getElementById("display").style.color = 'white';
 
         //else if (TotalTime < 'currentTick' < Sum-upTime)
-    } else if ((mySession.currentTotalSeconds > 0) && (countMode_sec >= 0) && (mySession.sessionMode != 3)) {
+    } else if ((myTimerSession.currentTotalSeconds > 0) && (countMode_sec >= 0) && (myTimerSession.sessionMode != 3)) {
         //in public
-        document.getElementById("timer_public").style.color = 'white';
+        document.getElementById("display").style.color = 'white';
 
         //else if (Sum-upTime < 'currentTick' < 0)
-    } else if ((mySession.currentTotalSeconds > 0) && (countMode_sec < 0) && (mySession.sessionMode != 3)) {
+    } else if ((myTimerSession.currentTotalSeconds > 0) && (countMode_sec < 0) && (myTimerSession.sessionMode != 3)) {
         //in public
-        document.getElementById("timer_public").style.color = 'white';
+        document.getElementById("display").style.color = 'white';
 
         //if (0 < 'currentTick')
-    } else if (mySession.sessionMode == 3) {
+    } else if (myTimerSession.sessionMode == 3) {
         //in public
-        document.getElementById("timer_public").style.color = '#fd030d';
+        document.getElementById("display").style.color = '#fd030d';
     }
 };
 
 //repeat function
-Session.prototype.repeat = function() {
+TimerSession.prototype.repeat = function() {
 
     //stop counter
-    clearInterval(mySession.intervalHandle);
+    clearInterval(myTimerSession.intervalHandle);
 
     //reset flags to initial state
-    mySession.sessionMode = 0;
-    mySession.pauseOn = false;
+    myTimerSession.sessionMode = 0;
+    myTimerSession.pauseOn = false;
 
 
     //get time in seconds
-    mySession.currentTotalSeconds = mySession.totalTime * 60;
-    mySession.sumupSeconds = mySession.sumupTime *60;
+    myTimerSession.currentTotalSeconds = myTimerSession.totalTime * 60;
+    myTimerSession.sumupSeconds = myTimerSession.sumupTime *60;
 
-    mySession.updateDisplays(mySession.currentTotalSeconds);
+    myTimerSession.updateDisplays(myTimerSession.currentTotalSeconds);
 
     //update the display traffic light colors
-    mySession.paintTrafficLights();
+    myTimerSession.paintTrafficLights();
 
     //manipulate buttons
     $('#b_pause').attr('disabled','disabled');
@@ -370,11 +357,62 @@ Session.prototype.repeat = function() {
 };
 
 //clear function
-Session.prototype.clear = function() {
+TimerSession.prototype.clear = function() {
     //ToDo
     //refresh/reset page
     location.reload();
 };
+
+//constructor for class ClockSession
+function ClockSession() {
+
+    //stop the Timer's intervalHandle
+    clearInterval(myTimerSession.intervalHandle);
+
+    //get updated time
+    myDate = new Date();
+    h = myDate.getHours();
+    if (h < 10) {
+        h = "0" + h;
+    }
+    m = myDate.getMinutes();
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    //Construct Clock string
+    myClockString = h + ":" + m ;
+
+    //Display Clock string
+    $('#display').text(myClockString);
+
+    //start animation
+    myTimerSession.intervalHandle = setInterval(update, 1000);
+
+    //Hide timerControls buttons
+    $( "#timerControls" ).hide();
+}
+
+//Clock - update function
+function update() {
+
+    //get updated time
+    myDate = new Date();
+    h = myDate.getHours();
+    if (h < 10) {
+        h = "0" + h;
+    }
+    m = myDate.getMinutes();
+    if (m < 10) {
+        m = "0" + m;
+    }
+
+    //Construct Clock string
+    myClockString = h + ":" + m ;
+
+    //Display Clock string
+    $('#display').text(myClockString);
+}
 
 //main - triggered when document ready
 $(document).ready(function() {
