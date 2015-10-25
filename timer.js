@@ -10,7 +10,7 @@ function Session(sessionMode) {
     if (sessionMode == 0) {
         myTimerSession = new TimerSession(0, 0, 0, 0, 0, 0, 0);
     } else if (sessionMode == 1) {
-        myClockSession = new ClockSession();
+        myClockSession = new ClockSession(0);
     }
     console.log("sessionMode = " + sessionMode)
 }
@@ -144,16 +144,20 @@ function TimerSession(timerCurrentTime, timerTotalTime, timerSumupTime, timerCur
     this.intervalHandle = intervalHandle;
     this.pauseOn = pauseOn;
 
-/*    //stop the Timer's intervalHandle
-    clearInterval(myClockSession.intervalHandle);*/
+    //hide clockDisplay, show timerDisplay
+    $('#clockDisplay').hide();
+    $('#timerDisplay').show();
+
+    //stop the Clock from working
+    if (typeof myClockSession != "undefined") {
+        clearInterval(myClockSession.intervalHandle);
+    }
 
     //Show timerControls buttons
     $( "#timerControls" ).show();
 
-    //Display Tiimer
-    $('#display').text("00:00");
-
-
+    //Display Timer
+    $('#timerDisplay').text("00:00");
 }
 
 //Increase total time (used by buttons' listeners)
@@ -176,16 +180,16 @@ TimerSession.prototype.decreaseTotalTime = function() {
 
 //update timer
 TimerSession.prototype.updateTimer = function(){
-    $('#display').text(mySession.sTimer);
+    $('#timerDisplay').text(mySession.sTimer);
 };
 
-//format display
-TimerSession.prototype.formatDisplay = function(display, time) {
+//format timerDisplay
+TimerSession.prototype.formatTimerDisplay = function(display, time) {
 
     if (time < 10) {
-        $('#display').html("0" + time + ":" + "00");
+        $('#timerDisplay').html("0" + time + ":" + "00");
     } else {
-        $('#display').html(time + ":" + "00");
+        $('#timerDisplay').html(time + ":" + "00");
     }
 };
 
@@ -274,7 +278,7 @@ TimerSession.prototype.updateDisplays = function (currentTotalSeconds) {
     $('#A').html(time_forDisplay);
 
     //- in timer public
-    document.getElementById("display").textContent = time_forDisplay;
+    document.getElementById("timerDisplay").textContent = time_forDisplay;
 };
 
 //this is the core timer function
@@ -312,22 +316,22 @@ TimerSession.prototype.paintTrafficLights = function() {
     //if on reset
     if (myTimerSession.sessionMode == 0 ) {
         //in public
-        document.getElementById("display").style.color = 'white';
+        document.getElementById("timerDisplay").style.color = 'white';
 
         //else if (TotalTime < 'currentTick' < Sum-upTime)
     } else if ((myTimerSession.currentTotalSeconds > 0) && (countMode_sec >= 0) && (myTimerSession.sessionMode != 3)) {
         //in public
-        document.getElementById("display").style.color = 'white';
+        document.getElementById("timerDisplay").style.color = 'white';
 
         //else if (Sum-upTime < 'currentTick' < 0)
     } else if ((myTimerSession.currentTotalSeconds > 0) && (countMode_sec < 0) && (myTimerSession.sessionMode != 3)) {
         //in public
-        document.getElementById("display").style.color = 'white';
+        document.getElementById("timerDisplay").style.color = 'white';
 
         //if (0 < 'currentTick')
     } else if (myTimerSession.sessionMode == 3) {
         //in public
-        document.getElementById("display").style.color = '#fd030d';
+        document.getElementById("timerDisplay").style.color = '#fd030d';
     }
 };
 
@@ -364,20 +368,27 @@ TimerSession.prototype.clear = function() {
 };
 
 //constructor for class ClockSession
-function ClockSession() {
+function ClockSession(intervalHandle) {
 
-    //stop the Timer's intervalHandle
-    clearInterval(myTimerSession.intervalHandle);
+    //hide timerDisplay, show clockDisplay
+    $('#timerDisplay').hide();
+    $('#clockDisplay').show();
 
-    //update clock every second
-    myTimerSession.intervalHandle = setInterval(update, 1000);
+    //stop the Timer from working
+    if (typeof myTimerSession != "undefined") {
+        clearInterval(myTimerSession.intervalHandle);
+    }
+
+    //update clock now and on every second
+    updateClock();
+    this.intervalHandle = setInterval(updateClock, 1000);
 
     //Hide timerControls buttons
     $( "#timerControls" ).hide();
 }
 
 //Clock - update function
-function update() {
+function updateClock() {
 
     //get updated time
     myDate = new Date();
@@ -399,7 +410,7 @@ function update() {
     }
 
     //Display Clock strings
-    $('#display').text(myClockString);
+    $('#clockDisplay').text(myClockString);
 }
 
 //main - triggered when document ready

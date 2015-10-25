@@ -37,7 +37,7 @@ html {
     margin-right: auto;
     /*background-color: red;*/
 }
-#display {
+#timerDisplay {
     font-size: 170px;
     color: white;
     /*background-color: #99fe00;*//**//*(green)*/
