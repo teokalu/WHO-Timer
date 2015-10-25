@@ -144,8 +144,8 @@ function TimerSession(timerCurrentTime, timerTotalTime, timerSumupTime, timerCur
     this.intervalHandle = intervalHandle;
     this.pauseOn = pauseOn;
 
-    //stop the Timer's intervalHandle
-    clearInterval(myClockSession.intervalHandle);
+/*    //stop the Timer's intervalHandle
+    clearInterval(myClockSession.intervalHandle);*/
 
     //Show timerControls buttons
     $( "#timerControls" ).show();
@@ -369,24 +369,7 @@ function ClockSession() {
     //stop the Timer's intervalHandle
     clearInterval(myTimerSession.intervalHandle);
 
-    //get updated time
-    myDate = new Date();
-    h = myDate.getHours();
-    if (h < 10) {
-        h = "0" + h;
-    }
-    m = myDate.getMinutes();
-    if (m < 10) {
-        m = "0" + m;
-    }
-
-    //Construct Clock string
-    myClockString = h + ":" + m ;
-
-    //Display Clock string
-    $('#display').text(myClockString);
-
-    //start animation
+    //update clock every second
     myTimerSession.intervalHandle = setInterval(update, 1000);
 
     //Hide timerControls buttons
@@ -407,10 +390,15 @@ function update() {
         m = "0" + m;
     }
 
-    //Construct Clock string
-    myClockString = h + ":" + m ;
+    //create time strings for the animation
+    s = myDate.getSeconds();
+    if (s % 2 == 0) {
+        myClockString = h + ":" + m ;
+    } else {
+        myClockString = h + " " + m ;
+    }
 
-    //Display Clock string
+    //Display Clock strings
     $('#display').text(myClockString);
 }
 
