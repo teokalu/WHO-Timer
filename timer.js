@@ -15,8 +15,6 @@ function Session(sessionMode) {
     console.log("sessionMode = " + sessionMode)
 }
 
-//methods - 'class': Session
-
 //initializeUI
 Session.prototype.initializeUI = function(){
 
@@ -156,8 +154,8 @@ function TimerSession(timerCurrentTime, timerTotalTime, timerSumupTime, timerCur
     //Show timerControls buttons
     $( "#timerControls" ).show();
 
-    //Display Timer
-    $('#timerDisplay').text("00:00");
+/*    //Display Timer
+    $('#timerDisplay').text("00:00");*/
 }
 
 //Increase total time (used by buttons' listeners)
@@ -183,7 +181,7 @@ TimerSession.prototype.updateTimer = function(){
     $('#timerDisplay').text(mySession.sTimer);
 };
 
-//format timerDisplay
+/*//format timerDisplay
 TimerSession.prototype.formatTimerDisplay = function(display, time) {
 
     if (time < 10) {
@@ -191,7 +189,7 @@ TimerSession.prototype.formatTimerDisplay = function(display, time) {
     } else {
         $('#timerDisplay').html(time + ":" + "00");
     }
-};
+};*/
 
 //format to String
 TimerSession.prototype.format = function(value) {
@@ -205,12 +203,6 @@ TimerSession.prototype.format = function(value) {
 //reset timer
 TimerSession.prototype.resetTimer = function () {
     return "00:00";
-};
-
-TimerSession.prototype.startClock = function() {
-
-    myTimerSession.updateClock();
-    myTimerSession.clockMode = 1;
 };
 
 //start the timer
